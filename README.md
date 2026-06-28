@@ -2,7 +2,7 @@
 
 R pipelines for separating breeding and migratory bird populations in large-scale monitoring datasets and tracking long-term phenological trends in timing of migration.
 
-**Author:** Swastik Mandal, IISER Pune &nbsp;·&nbsp; Internship at the Swiss Ornithological Institute (Summer 2025)  
+**Author:** Swastik Mandal, IISER Pune &nbsp;·&nbsp;  
 **Supervisor:** Nicolas Strebel, Swiss Ornithological Institute
 
 ---
