@@ -1,0 +1,15 @@
+# Mac
+.DS_Store
+**/.DS_Store
+
+# R
+.Rhistory
+**/.Rhistory
+
+# Raw / proprietary data
+*.xlsx
+databb.csv
+
+# Bulk per-species outputs (hundreds of files — not tracked)
+**/species_outputs/
+**/species_phenology/
