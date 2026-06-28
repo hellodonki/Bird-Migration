@@ -307,4 +307,4 @@ Rscript plot_slopes.r
 
 ## Acknowledgements
 
-[Nicolas Strebel](https://www.vogelwarte.ch) (Swiss Ornithological Institute) provided data access, domain expertise, and conceptual guidance across all three analyses.
+[Nicolas Strebel](https://www.vogelwarte.ch) (Swiss Ornithological Institute) provided data access, domain expertise, and conceptual guidance across all three analyses and Claude helped me to organise the repository. 
