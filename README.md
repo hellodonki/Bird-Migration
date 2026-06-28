@@ -11,13 +11,19 @@ R pipelines for separating breeding and migratory bird populations in large-scal
 
 Standardised bird monitoring schemes count breeding residents and passage migrants together, making it hard to interpret raw counts in terms of either group. These three analyses use atlas-code-based site classification and a spatial buffer to split observations into breeding and non-breeding components, fit LOESS-smoothed phenological curves to each subset, and extract key timing metrics. A third analysis tracks how those metrics have shifted across nearly two decades of Swiss data.
 
-| Sub-project | Dataset | Species | Core question |
-|---|---|---|---|
-| [`bavaria_migration/`](bavaria_migration/) | Bavarian MhB — territory records | 138 | Do non-breeding sites isolate migrant passage? How well do expert reference dates match observed peaks? |
-| [`swissdata_migration/`](swissdata_migration/) | Swiss MHB — atlas codes (2021–25) | 84 | What are current breeding and migrant phenological curves, and when is the 50%-departure date? |
-| [`swissdata_phenology/`](swissdata_phenology/) | Swiss MHB — atlas codes (2007–25) | 83 | Are migrant and breeder peak timings shifting over time, and at different rates? |
+The objective is to re-evaluate reference dates laid out in Swiss ornithological surveys (spoken of as 'stichdatum') by checking for the departure of migrants, settling of breeders ('residents') and the change in phenological patterns across years. The notion is such that avian migration time-periods have undergone some amount of change since the initial definition of the surveying periods in the '90s (for instance, a migrants' peak slope of -0.3 in 2026 would mean that migrants are departing 3 days earlier than they did in 2016). 
 
----
+Broadly, I have used data from the regions of Bavaria, Baden-Wuerttemberg and the information logged onto ornitho.ch for different time periods. Although the datasets showed considerable variation in regard to how it is stored (in terms of variables, time-periods, behaviour indicators), it was useful to lay down a foundational basis of differentiation between migrant and breeding individuals (or, sites), using relevant relational algebra expressions. Following that, similar metrics (breeding peaks, migrant threshold, etc) were put to test, to answer the following three questions, at both within and across-species levels:
+
+(1) How do the breeders' peak dates compare with the reference dates? 
+(2) Do the reference dates compare well with the departure of migrants? 
+(3) Have these indicators (peaks/thresholds of migrants/breeders) considerably changed across years?
+
+| Sub-project | Dataset | Species | 
+|---|---|---|
+| [`bavaria_migration/`](bavaria_migration/) | Bavarian MhB — territory records | 138 | 
+| [`swissdata_migration/`](swissdata_migration/) | Swiss MHB — atlas codes (2021–25) | 84 | 
+| [`swissdata_phenology/`](swissdata_phenology/) | Swiss MHB — atlas codes (2007–25) | 83 | 
 
 ## Key Results
 
