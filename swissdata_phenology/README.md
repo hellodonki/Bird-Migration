@@ -52,18 +52,18 @@ Many migratory birds are shifting their arrival and departure timing in response
 ```
 swissdata_phenology/
 ├── bb_doy.csv                    # Species reference dates
-├── phenology_peak_slopes.csv     # Cross-species slope summary
+├── phenology_peak_slopes.csv     # Cross-species slope summary (migrant + breeder slopes)
 ├── histogram_breeder_slope.png   # Distribution of breeder peak-DOY trends
 ├── histogram_migrant_slope.png   # Distribution of migrant peak-DOY trends
 ├── phenologymc.r                 # Step 1 — per-species rolling-window analysis
 ├── phenologymc2.r                # Step 1 (variant) — alternative parameterisation
 ├── slope_summary.r               # Step 2 — compile slopes across species
 ├── plot_slopes.r                 # Step 3 — plot slope distributions
-└── species_phenology/            # Per-species plots and CSVs (not tracked in git)
+└── species_phenology/            # Per-species plots and CSVs (83 species)
     └── [SpeciesName]/
-        ├── [SpeciesName]_[window].png
-        ├── [SpeciesName]_trend.png
-        └── [SpeciesName]_phenology_shifts.csv
+        ├── [SpeciesName]_[window].png         # LOESS curve for each of the 15 windows
+        ├── [SpeciesName]_trend.png             # Peak DOY vs. mid-year with trend line
+        └── [SpeciesName]_phenology_shifts.csv # Peak DOY per window, slopes, and CIs
 ```
 
 ---

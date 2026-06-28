@@ -55,13 +55,13 @@ swissdata_migration/
 ├── territory_separation.r     # Step 1 — site classification and data splitting
 ├── nbb_final.r                # Step 2 — OPM/SOPM, LOESS fitting, date extraction
 ├── histogram.r                # Step 3 — aggregate histograms
-└── species_outputs/           # Per-species CSVs and plots (not tracked in git)
+└── species_outputs/           # Per-species CSVs and plots (84 species)
     └── [SpeciesName]/
-        ├── [SpeciesName].csv
-        ├── [SpeciesName]_bs.csv
-        ├── [SpeciesName]_nbs.csv
-        ├── [SpeciesName]_map(21-25).png
-        └── [SpeciesName]_prediction(21-25).png
+        ├── [SpeciesName].csv                   # Full pentade × year table (all sites)
+        ├── [SpeciesName]_bs.csv                # Breeding-site subset
+        ├── [SpeciesName]_nbs.csv               # Non-breeding-site subset
+        ├── [SpeciesName]_map(21-25).png        # Map of breeding vs non-breeding sites
+        └── [SpeciesName]_prediction(21-25).png # LOESS curves with key phenological dates
 ```
 
 ---
