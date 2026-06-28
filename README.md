@@ -1,4 +1,4 @@
-# Bird Migration Analysis — Summer Research 2025
+# Bird Migration Analysis — Summer Research 2026
 
 R pipelines for separating breeding and migratory bird populations in large-scale monitoring datasets and tracking long-term phenological trends in timing of migration.
 
