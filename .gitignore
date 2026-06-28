@@ -10,6 +10,3 @@
 *.xlsx
 databb.csv
 
-# Bulk per-species outputs (hundreds of files — not tracked)
-**/species_outputs/
-**/species_phenology/
