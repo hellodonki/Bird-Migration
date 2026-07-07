@@ -186,6 +186,10 @@ A semi-join filters `reference.csv` to species classified as migrants, producing
 
 Histograms of phenological date distributions and pairwise differences (reference vs computed dates) are saved to `output/across_species_outputs/` and `output/lst_outputs/`. A scatter plot relates expert reference DOY to observed Orange50_DOY across species.
 
+| ![Reference DOY distribution](bavaria_migration/output/across_species_outputs/histogramReferenceDOY.png) | ![Reference vs Orange50 DOY](bavaria_migration/output/across_species_outputs/scatter_plot_ref_orange.png) |
+|---|---|
+| Distribution of expert reference dates (DOY) | Reference DOY vs observed Orange50 DOY, across species |
+
 ### Requirements
 
 ```r
@@ -370,6 +374,10 @@ For species with ≥30 records, day-of-year is restricted to 59–181. Counts ar
 
 Species are joined to a Swiss trait table for their `Kst`/`Lst` migratory-strategy code, and the reference-offset and year-on-year slope distributions are plotted separately for each group.
 
+| ![Migrant slope by zug](wuerttemberg_1/across_species_outputs/hist_wuerttemberg_migrant_slope_by_zug.png) | ![Breeder slope by zug](wuerttemberg_1/across_species_outputs/hist_wuerttemberg_breeder_slope_by_zug.png) |
+|---|---|
+| Migrant peak-DOY trend (days yr⁻¹), by Kst/Lst | Breeder peak-DOY trend (days yr⁻¹), by Kst/Lst |
+
 ### Requirements
 
 ```r
@@ -416,6 +424,10 @@ For species with ≥30 records, breeding- and non-breeding-site counts are aggre
 
 Species are split into `Kst`/`Lst` subfolders using the same Swiss trait table as `wuerttemberg_1`.
 
+| ![All sites vs migrants — Perdix perdix](wuerttemberg_2/species_outputs_gam/Perdix_perdix/all_vs_migrants.png) | ![Migrant proportion — Perdix perdix](wuerttemberg_2/species_outputs_gam/Perdix_perdix/migrant_proportion_higher_max.png) |
+|---|---|
+| *Perdix perdix* — all-sites vs non-breeding-site GAM curves | *Perdix perdix* — scaled migrant-proportion curve |
+
 ### Requirements
 
 ```r
@@ -455,6 +467,10 @@ Each regional analysis independently produces, per species, an expert reference 
 **2. Dot plots and scatterplots** — Reference-offsets and raw peak dates are compared per species across datasets (all-four and pairwise), and one offset metric is plotted against another to check internal consistency within and across datasets.
 
 **3. Concordance (CCC) and Bland–Altman analysis** — For every dataset pair, Lin's CCC (with a 2000-resample bootstrap confidence interval) and a classic Bland–Altman bias/limits-of-agreement analysis are computed for the raw peak dates (pooled across migratory strategy) and separately for the reference-offsets split by `Kst`/`Lst` ("zugwise"), plus a version restricted to the 19 species shared by all four datasets ("common19"). Species that fall outside the limits of agreement in every pairwise comparison they appear in are flagged as consistent outliers.
+
+| ![Reference vs breeder-peak offset, 4 datasets](acrossdata_results/scatterplot/4datasets/scatter_ref_minus_breedpeak.png) | ![Reference vs migrant-peak offset, 4 datasets](acrossdata_results/scatterplot/4datasets/scatter_ref_minus_migpeak.png) |
+|---|---|
+| Reference-minus-breeder-peak offset across all 4 datasets (19 shared species) | Reference-minus-migrant-peak offset across all 4 datasets (19 shared species) |
 
 ### Requirements
 
