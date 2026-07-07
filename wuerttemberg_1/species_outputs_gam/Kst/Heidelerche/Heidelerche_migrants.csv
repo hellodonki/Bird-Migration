@@ -1,0 +1,5 @@
+species,site,year,date,n_individuals,n_guests,guest,singing,calling,warning,aggressive_interaction,couple,female,nesting_material,feeding,nest,juvenile,territory,doy
+Heidelerche,248,2021,2021-03-22,1,0,?,?,T,?,?,?,?,?,?,?,?,?,81
+Heidelerche,248,2021,2021-04-16,0,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,106
+Heidelerche,248,2021,2021-05-13,0,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,133
+Heidelerche,248,2021,2021-05-31,0,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,151
