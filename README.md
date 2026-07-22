@@ -30,6 +30,8 @@ A final question extends this across datasets: do the answers to (1) and (2) hol
 | [`wuerttemberg_2/`](wuerttemberg_2/) | Baden-Württemberg MhB/Ornitho — behavioural codes (2020–25) | 99 |
 | [`acrossdata_results/`](acrossdata_results/) | Cross-dataset comparison of the four analyses above | 19 shared species |
 
+A Streamlit dashboard ([`dashboard/`](dashboard/)) ties all five analyses together in one interactive viewer — see the [`dashboard`](#dashboard) section below.
+
 ## Key Results
 
 **Bavaria** — Across 111 species with full phenological metrics, expert reference dates fall a median of 12 days before the observed 50%-departure date — consistent with references marking active passage. For 59 of 87 species the reference date aligns with ongoing migration; the remaining 28 show reference dates lagging the observed passage window.
@@ -73,8 +75,15 @@ Bird-Migration/
 │   ├── bb_doy.csv                       # Reference dates and computed DOY metrics
 │   ├── territory_separation.r           # Step 1 — site classification and splitting
 │   ├── nbb_final.r                      # Step 2 — OPM/SOPM, LOESS, date extraction
-│   ├── histogram.r                      # Step 3 — aggregate histograms
-│   └── species_outputs/                 # Per-species outputs (84 species)
+│   ├── nbpred.r                         # Step 3 — pentade→DOY phenology metric extraction
+│   ├── histogram.r                      # Step 4 — aggregate histograms, by migratory strategy
+│   ├── histogramReference-BreedingPeak_pred_5kmbuffer.png
+│   ├── histogramReference-Migrant50_pred_5kmbuffer.png
+│   └── species_outputs_atlas4/          # Per-species outputs (84 species), split by migratory strategy
+│       ├── doy_summary_atlas4.csv       # Cross-species DOY summary
+│       ├── hist_swiss_atlas4_ref_minus_breederpeak_by_zug.png
+│       ├── hist_swiss_atlas4_ref_minus_migrant50_by_zug.png
+│       ├── Kst/ · Lst/                  # Short-distance (Kst) / long-distance (Lst) migrants
 │       └── [SpeciesName]/
 │           ├── [SpeciesName].csv
 │           ├── [SpeciesName]_bs.csv
@@ -85,44 +94,70 @@ Bird-Migration/
 ├── swissdata_phenology/
 │   ├── bb_doy.csv                       # Species reference dates
 │   ├── phenology_peak_slopes.csv        # Cross-species slope summary
-│   ├── histogram_breeder_slope.png      # Distribution of breeder peak-DOY trends
-│   ├── histogram_migrant_slope.png      # Distribution of migrant peak-DOY trends
+│   ├── hist_breeder_slope_by_zug.png    # Distribution of breeder peak-DOY trends, by Kst/Lst
+│   ├── hist_migrant_slope_by_zug.png    # Distribution of migrant peak-DOY trends, by Kst/Lst
 │   ├── phenologymc.r                    # Step 1 — per-species rolling-window analysis
-│   ├── slope_summary.r                  # Step 2 — compile slopes across species
+│   ├── phenologymc2.r                   # Step 1 (parallel working copy of phenologymc.r)
+│   ├── slope_summary.r                  # Step 2 — compile slopes across species, by migratory strategy
 │   ├── plot_slopes.r                    # Step 3 — slope distribution histograms
-│   └── species_phenology/               # Per-species outputs (83 species)
-│       └── [SpeciesName]/
-│           ├── [SpeciesName]_[window].png
-│           ├── [SpeciesName]_trend.png
-│           └── [SpeciesName]_phenology_shifts.csv
+│   └── species_phenology3/              # Per-species outputs (83 species), split by migratory strategy
+│       └── Kst/ · Lst/                  # Short-distance (Kst) / long-distance (Lst) migrants
+│           └── [SpeciesName]/
+│               ├── [SpeciesName]_[window].png
+│               ├── [SpeciesName]_trend.png
+│               └── [SpeciesName]_phenology_shifts.csv
 │
 ├── wuerttemberg_1/
 │   ├── species_gam.R                    # Site classification + per-species GAM curve fitting
-│   ├── species_outputs_gam/             # Per-species outputs, split by migratory strategy
-│   │   ├── Kst/ · Lst/                  # Short-distance (Kst) / long-distance (Lst) migrants
-│   │   └── [SpeciesName]/
-│   │       ├── [SpeciesName]_migrants.csv
-│   │       ├── [SpeciesName]_breeders.csv
-│   │       ├── all_vs_migrants.png
-│   │       └── migrant_proportion_higher_max.png
-│   └── across_species_outputs/          # Cross-species slope & reference-offset histograms
-│
-├── wuerttemberg_2/
-│   ├── species_gam.R                    # "Ever-breeder" site classification + per-species GAM fitting
-│   └── species_outputs_gam/             # Per-species outputs, split by migratory strategy
-│       ├── Kst/ · Lst/                  # Short-distance (Kst) / long-distance (Lst) migrants
+│   └── species_outputs_loess_visitbased/ # Per-species outputs, split by migratory strategy (German common names)
+│       ├── Kst/ · Lst/                  # Short-distance (Kst, 47 spp.) / long-distance (Lst, 17 spp.) migrants
+│       ├── Rebhuhn/                     # Grey partridge — flat folder, outside the Kst/Lst split
 │       └── [SpeciesName]/
 │           ├── [SpeciesName]_migrants.csv
 │           ├── [SpeciesName]_breeders.csv
+│           ├── [SpeciesName]_migrants_fit_check.png
+│           ├── [SpeciesName]_breeders_fit_check.png
+│           ├── [SpeciesName]_all_vs_migrants_fit_check.png
 │           ├── all_vs_migrants.png
 │           └── migrant_proportion_higher_max.png
 │
-└── acrossdata_results/                  # Cross-dataset agreement figures (Bavaria, Swiss, Württemberg 1 & 2)
-    ├── dotplot/                         # Per-species reference-offset & peak-date dot plots
-    │   └── [4 datasets | w1bav | w1w2 | w1swiss | w2bav | w2swiss | bavswiss]/
-    ├── scatterplot/                     # Pairwise & 4-dataset scatterplots, parallel coordinates
-    ├── heatmaps/                        # CCC / Bland–Altman agreement heatmaps (pooled and by zug)
-    └── histogram/                       # Pooled reference-offset histograms across all 4 datasets
+├── wuerttemberg_2/
+│   ├── species_gam.R                    # "Ever-breeder" site classification + per-species GAM fitting
+│   └── species_outputs_loess_visitbased/ # Per-species outputs, split by migratory strategy (scientific names)
+│       ├── Kst/ · Lst/                  # Short-distance (Kst, 69 spp.) / long-distance (Lst, 28 spp.) migrants
+│       ├── Perdix_perdix/               # Grey partridge — flat folder, outside the Kst/Lst split
+│       └── [SpeciesName]/
+│           ├── [SpeciesName]_migrants.csv
+│           ├── [SpeciesName]_breeders.csv
+│           ├── [SpeciesName]_migrants_fit_check.png
+│           ├── [SpeciesName]_breeders_fit_check.png
+│           ├── [SpeciesName]_all_vs_migrants_fit_check.png
+│           ├── all_vs_migrants.png
+│           └── migrant_proportion_higher_max.png
+│
+├── acrossdata_results/                  # Cross-dataset agreement figures (Bavaria, Swiss, Württemberg 1 & 2)
+│   ├── dotplot/                         # Per-species reference-offset & peak-date dot plots
+│   │   ├── phenology_peaks_dotplot.pdf · phenology_peaks_dotplot_shared.pdf · dotplot_common19.pdf
+│   │   └── [w1bav | w1w2 | w1swiss | w2bav | w2swiss | bavswiss]/
+│   ├── scatterplot/                     # Pairwise, pooled, and dimensionality-reduction views
+│   │   ├── 4datasets/                   # Pooled scatterplots across the 19 shared species
+│   │   ├── parallel_coords/             # Parallel-coordinates plots across all four datasets
+│   │   ├── pca/                         # PCA biplots of offset metrics
+│   │   ├── radar/                       # Radar/spider charts of offset metrics
+│   │   ├── [Bavaria | Swiss | Württemberg | Württemberg_2]/  # Within-dataset metric-vs-metric scatterplots
+│   │   └── [w1bav | w1w2 | w1swiss | w2bav | w2swiss | bavswiss]/  # Pairwise dataset-vs-dataset scatterplots
+│   ├── bland_altman/                    # CCC / Bland–Altman agreement (pooled, zugwise, common19 — summary CSVs + PDFs at root)
+│   │   └── [bavswiss | w1bav | w1swiss | w1w2 | w2bav | w2swiss]/  # Per-pair Bland–Altman plots
+│   └── histogram/                       # Pooled reference-offset histogram across all 4 datasets
+│
+└── dashboard/                            # Streamlit viewer over all five analyses + cross-dataset comparison
+    ├── app.py
+    ├── requirements.txt
+    └── utils/
+        ├── datasets.py                  # Per-dataset species list / phenology-curve loaders
+        ├── de_to_sci.py                 # German common-name → scientific-name lookup (mirrors wuerttemberg_1 naming)
+        ├── paths.py                     # Path constants for each sub-project's output folders
+        └── smoothers.py                 # LOESS/GAM helpers for the live "Species Explorer" tab
 ```
 
 ---
@@ -134,7 +169,7 @@ All six analyses follow the same conceptual pipeline — classify sites/records 
 1. **Site/record classification** — each survey site (or, in Württemberg, each site×year) is classified as breeding or non-breeding. Bavaria and Swiss MHB use the maximum breeding-evidence **code** (atlas code or territory count) recorded there; the two Württemberg analyses instead use **behavioural flags** logged per visit (song, nesting material, feeding young, territorial aggression, etc.) — Württemberg 1 pools this across all years per site, Württemberg 2 uses an "ever-breeder" rule (any confirmed-breeding record across 2020–25 marks that site as breeding for all years)
 2. **Spatial buffer** — Bavaria and Swiss MHB additionally exclude non-breeding sites within 5 km of any confirmed breeding site, reducing contamination of the migrant signal by birds commuting from nearby territories; the Württemberg analyses do not apply a spatial buffer
 3. **OPM / SOPM** — the Observed Peak Maximum per site is summed across the network to produce a single phenological abundance index per time unit (day-of-year or pentade)
-4. **Curve fitting** — Bavaria and Swiss MHB fit LOESS curves to breeding-site and non-breeding-site SOPM; both Württemberg analyses fit a GAM (`s(doy, bs="cs", k=10)`) instead. Key dates (peak, 50% departure) are extracted from each fitted curve, benchmarked against the same expert reference dates used in `bavaria_migration`, and — in the two Württemberg analyses — additionally grouped by migratory strategy (`Kst`/`Lst`, short-/long-distance migrant, from a Swiss species-trait table)
+4. **Curve fitting** — Bavaria and Swiss MHB fit LOESS curves to breeding-site and non-breeding-site SOPM; both Württemberg analyses fit a GAM (`s(doy, bs="cs", k=10)`) instead. Key dates (peak, 50% departure) are extracted from each fitted curve and benchmarked against the same expert reference dates used in `bavaria_migration`. All four analyses now additionally group species by migratory strategy (`Kst`/`Lst`, short-/long-distance migrant, from a Swiss species-trait table) in their cross-species summary plots — for the two Württemberg analyses this split is baked into the per-species output folders themselves (`species_outputs_loess_visitbased/Kst/`, `/Lst/`), for the two Swiss analyses it appears in the `_by_zug` cross-species histograms
 5. **Cross-dataset agreement** — `acrossdata_results` takes the peak dates and reference-date offsets produced by the four analyses above and tests whether they agree with each other across datasets, using concordance correlation (CCC) and Bland–Altman analysis
 
 ---
@@ -242,7 +277,7 @@ Each 1 km² site is assigned a maximum atlas code from all observations for a gi
 
 For each species and site class, the Observed Peak Maximum (OPM) per site per pentade per year is computed, then summed across sites to produce the SOPM. A complete pentade × year grid (pentades 10–37, years 2021–2025) is constructed with zeros for missing combinations.
 
-**3. LOESS Curve Fitting and Date Extraction** &nbsp;(`nbb_final.r`)
+**3. LOESS Curve Fitting and Date Extraction** &nbsp;(`nbb_final.r`, `nbpred.r`)
 
 LOESS (span = 0.4) is fitted to breeding and non-breeding SOPM series. Three metrics are extracted per species:
 
@@ -252,9 +287,11 @@ LOESS (span = 0.4) is fitted to breeding and non-breeding SOPM series. Three met
 | `migrant50_doy` | Day non-breeding SOPM descends to 50% of its peak |
 | `breeder_peak_doy` | Pentade of peak breeding-site SOPM |
 
+`nbpred.r` converts these pentade-resolution metrics to day-of-year and compiles them into `species_outputs_atlas4/doy_summary_atlas4.csv`.
+
 **4. Aggregate Visualisations** &nbsp;(`histogram.r`)
 
-Histograms summarise the distributions of `migrant50_doy` and `breeder_peak_doy` relative to expert reference dates.
+Histograms summarise the distributions of `migrant50_doy` and `breeder_peak_doy` relative to expert reference dates, both pooled and split by migratory strategy (`hist_swiss_atlas4_ref_minus_breederpeak_by_zug.png`, `hist_swiss_atlas4_ref_minus_migrant50_by_zug.png`).
 
 | ![Migrant 50% departure](swissdata_migration/histogramReference-Migrant50_pred_5kmbuffer.png) | ![Breeder peak](swissdata_migration/histogramReference-BreedingPeak_pred_5kmbuffer.png) |
 |---|---|
@@ -316,15 +353,15 @@ A linear model is fitted to peak DOY across the 15 windows for migrants and bree
 Peak DOY ~ mid-year of window
 ```
 
-The slope (days yr⁻¹), 95% confidence intervals, and R² are compiled per species in `phenology_peak_slopes.csv`.
+The slope (days yr⁻¹), 95% confidence intervals, and R² are compiled per species in `phenology_peak_slopes.csv`, and species are split into `Kst`/`Lst` migratory-strategy subfolders (`species_phenology3/Kst/`, `/Lst/`) using the same Swiss trait table as the Württemberg analyses.
 
 **5. Cross-Species Summary** &nbsp;(`plot_slopes.r`)
 
-Histograms of migrant and breeder slopes across all species are plotted to compare overall direction and magnitude of phenological change.
+Histograms of migrant and breeder slopes across all species are plotted to compare overall direction and magnitude of phenological change, split by migratory strategy.
 
-| ![Migrant slopes](swissdata_phenology/histogram_migrant_slope.png) | ![Breeder slopes](swissdata_phenology/histogram_breeder_slope.png) |
+| ![Migrant slopes](swissdata_phenology/hist_migrant_slope_by_zug.png) | ![Breeder slopes](swissdata_phenology/hist_breeder_slope_by_zug.png) |
 |---|---|
-| Migrant peak DOY trend (days yr⁻¹) | Breeder peak DOY trend (days yr⁻¹) |
+| Migrant peak DOY trend (days yr⁻¹), by Kst/Lst | Breeder peak DOY trend (days yr⁻¹), by Kst/Lst |
 
 ### Requirements
 
@@ -349,16 +386,16 @@ Analysis of bird phenology in Baden-Württemberg using the "Monitoring häufiger
 
 ### Background
 
-The raw MhB survey table nominally spans 2006–2023, but every record from 2006–2017 has an empty date field and is dropped during cleaning — so the usable analysis window is effectively **2018–2023**. Site classification here does not rely on a fixed atlas code but on behavioural flags recorded at each visit (singing, warning/alarm calls, aggressive territorial interactions, nesting material, feeding of young, active nests, juveniles, and territory records); a site is treated as a confirmed-breeding site for a species if any visit across the whole period shows one of these flags. Per-species curves are fitted with a GAM and benchmarked against the same expert reference dates used in `bavaria_migration`, joined via a German common-name → scientific-name lookup. Species are further split into short-distance (`Kst`) and long-distance (`Lst`) migrants using a Swiss species-trait reference table, since the two strategies are expected to show different passage timing and different agreement with the reference dates.
+The raw MhB survey table nominally spans 2006–2023, but every record from 2006–2017 has an empty date field and is dropped during cleaning — so the usable analysis window is effectively **2018–2023**. Site classification here does not rely on a fixed atlas code but on behavioural flags recorded at each visit (singing, warning/alarm calls, aggressive territorial interactions, nesting material, feeding of young, active nests, juveniles, and territory records); a site is treated as a confirmed-breeding site for a species if any visit across the whole period shows one of these flags. Per-species curves are fitted with a GAM (`species_gam.R`) and benchmarked against the same expert reference dates used in `bavaria_migration`, joined via a German common-name → scientific-name lookup (`dashboard/utils/de_to_sci.py` holds the canonical mapping). Output folders and species names use the German common names directly (e.g. `Amsel`, `Rotkehlchen`). Species are further split into short-distance (`Kst`, 47 species) and long-distance (`Lst`, 17 species) migrants using a Swiss species-trait reference table, since the two strategies are expected to show different passage timing and different agreement with the reference dates; one species (`Rebhuhn`, grey partridge) sits outside this split in a flat top-level folder.
 
 ### Data
 
 | File | Description |
 |---|---|
-| `species_outputs_gam/[SpeciesName]/[SpeciesName]_migrants.csv`, `_breeders.csv` | Per-species, per-DOY aggregated abundance for non-breeding and breeding sites |
-| `across_species_outputs/` | Cross-species histograms of reference-offsets and year-on-year slope trends, faceted by `Kst`/`Lst` |
+| `species_outputs_loess_visitbased/[SpeciesName]/[SpeciesName]_migrants.csv`, `_breeders.csv` | Per-species, per-DOY aggregated abundance for non-breeding and breeding sites |
+| `species_outputs_loess_visitbased/[SpeciesName]/*_fit_check.png` | Per-species GAM fit diagnostics for the breeding, migrant, and combined curves |
 
-The raw MhB export, the cleaning script, and the parallel LOESS-based pipeline (run for comparison against the GAM fit) are kept outside this repo; only the GAM-based results are published here.
+The raw MhB export and the cleaning script are kept outside this repo; only the GAM-based results are published here. (The `species_outputs_loess_visitbased` folder name reflects an earlier LOESS-based comparison pipeline — `species_gam.R` itself still fits a GAM.)
 
 ### Methods
 
@@ -368,15 +405,15 @@ Each site is labelled a confirmed-breeding site for a species if any visit acros
 
 **2. Per-Species GAM Curve Fitting** &nbsp;(`species_gam.R`)
 
-For species with ≥30 records, day-of-year is restricted to 59–181. Counts are aggregated per DOY across breeding and non-breeding sites separately, and a GAM (`n ~ s(doy, bs = "cs", k = 10)`, Gaussian family) is fitted to each subset. Two dates are extracted per species: the breeding-curve peak DOY, and the DOY on which the non-breeding (migrant) curve first descends to ≤50% of its peak. A scaled migrant-proportion curve (non-breeding ÷ all-sites, where the scaled all-sites curve is at least 6% of its own peak) is also produced.
+For species with ≥30 records, day-of-year is restricted to 59–181. Counts are aggregated per DOY across breeding and non-breeding sites separately, and a GAM (`n ~ s(doy, bs = "cs", k = 10)`, Gaussian family) is fitted to each subset. Two dates are extracted per species: the breeding-curve peak DOY, and the DOY on which the non-breeding (migrant) curve first descends to ≤50% of its peak. A scaled migrant-proportion curve (non-breeding ÷ all-sites, where the scaled all-sites curve is at least 6% of its own peak) is also produced, alongside `_fit_check.png` diagnostic plots for each fitted curve.
 
 **3. Cross-Species Summaries by Migratory Strategy** &nbsp;(external step, not included here)
 
 Species are joined to a Swiss trait table for their `Kst`/`Lst` migratory-strategy code, and the reference-offset and year-on-year slope distributions are plotted separately for each group.
 
-| ![Migrant slope by zug](wuerttemberg_1/across_species_outputs/hist_wuerttemberg_migrant_slope_by_zug.png) | ![Breeder slope by zug](wuerttemberg_1/across_species_outputs/hist_wuerttemberg_breeder_slope_by_zug.png) |
+| ![Grey partridge — all sites vs migrants](wuerttemberg_1/species_outputs_loess_visitbased/Rebhuhn/all_vs_migrants.png) | ![Grey partridge — breeder fit check](wuerttemberg_1/species_outputs_loess_visitbased/Rebhuhn/Rebhuhn_breeders_fit_check.png) |
 |---|---|
-| Migrant peak-DOY trend (days yr⁻¹), by Kst/Lst | Breeder peak-DOY trend (days yr⁻¹), by Kst/Lst |
+| *Rebhuhn* (grey partridge) — all-sites vs non-breeding-site GAM curves | *Rebhuhn* — breeding-curve GAM fit diagnostic |
 
 ### Requirements
 
@@ -399,16 +436,17 @@ A second, independent Baden-Württemberg MhB/Ornitho survey (2020–2025), analy
 
 ### Background
 
-Unlike `wuerttemberg_1`'s per-visit behavioural flags, site classification here uses an "ever-breeder" rule based on breeding-atlas codes: if any record at a site for a species across 2020–2025 carries a confirmed/probable-breeding atlas code (a `B`/`C`-prefixed code), that site is treated as a breeding site for that species for the full period; all other sites are treated as non-breeding (migrant). As in `wuerttemberg_1`, a GAM is fitted to the breeding and non-breeding abundance curves per species, key phenological dates are extracted and benchmarked against the Bavaria reference dates, and species are grouped by migratory strategy (`Kst`/`Lst`).
+Unlike `wuerttemberg_1`'s per-visit behavioural flags, site classification here uses an "ever-breeder" rule based on breeding-atlas codes: if any record at a site for a species across 2020–2025 carries a confirmed/probable-breeding atlas code (a `B`/`C`-prefixed code), that site is treated as a breeding site for that species for the full period; all other sites are treated as non-breeding (migrant). As in `wuerttemberg_1`, a GAM is fitted to the breeding and non-breeding abundance curves per species, key phenological dates are extracted and benchmarked against the Bavaria reference dates, and species are grouped by migratory strategy (`Kst`, 69 species; `Lst`, 28 species) — unlike `wuerttemberg_1`, species folders here keep their scientific names, with one species (`Perdix_perdix`) outside the split in a flat top-level folder.
 
 ### Data
 
 | File | Description |
 |---|---|
-| `species_outputs_gam/[SpeciesName]/[SpeciesName]_migrants.csv`, `_breeders.csv` | Per-species, per-DOY aggregated abundance for non-breeding and breeding sites |
-| `species_outputs_gam/Kst/`, `species_outputs_gam/Lst/` | Same per-species outputs, grouped by short- vs long-distance migrant |
+| `species_outputs_loess_visitbased/[SpeciesName]/[SpeciesName]_migrants.csv`, `_breeders.csv` | Per-species, per-DOY aggregated abundance for non-breeding and breeding sites |
+| `species_outputs_loess_visitbased/Kst/`, `species_outputs_loess_visitbased/Lst/` | Same per-species outputs, grouped by short- vs long-distance migrant |
+| `species_outputs_loess_visitbased/[SpeciesName]/*_fit_check.png` | Per-species GAM fit diagnostics for the breeding, migrant, and combined curves |
 
-The raw Ornitho export, the cleaning script, and the parallel LOESS-based pipeline are kept outside this repo; only the GAM-based results are published here.
+The raw Ornitho export and the cleaning script are kept outside this repo; only the GAM-based results are published here. (As with `wuerttemberg_1`, the `species_outputs_loess_visitbased` folder name reflects an earlier LOESS-based comparison pipeline — `species_gam.R` itself still fits a GAM.)
 
 ### Methods
 
@@ -424,7 +462,7 @@ For species with ≥30 records, breeding- and non-breeding-site counts are aggre
 
 Species are split into `Kst`/`Lst` subfolders using the same Swiss trait table as `wuerttemberg_1`.
 
-| ![All sites vs migrants — Perdix perdix](wuerttemberg_2/species_outputs_gam/Perdix_perdix/all_vs_migrants.png) | ![Migrant proportion — Perdix perdix](wuerttemberg_2/species_outputs_gam/Perdix_perdix/migrant_proportion_higher_max.png) |
+| ![All sites vs migrants — Perdix perdix](wuerttemberg_2/species_outputs_loess_visitbased/Perdix_perdix/all_vs_migrants.png) | ![Migrant proportion — Perdix perdix](wuerttemberg_2/species_outputs_loess_visitbased/Perdix_perdix/migrant_proportion_higher_max.png) |
 |---|---|
 | *Perdix perdix* — all-sites vs non-breeding-site GAM curves | *Perdix perdix* — scaled migrant-proportion curve |
 
@@ -455,10 +493,10 @@ Each regional analysis independently produces, per species, an expert reference 
 
 | Folder | Contents |
 |---|---|
-| `dotplot/` | Per-species dot plots of reference-offsets and raw peak dates, one dot per dataset per species, for species common to all 4 datasets and for each dataset pair (`w1bav`, `w1w2`, `w1swiss`, `w2bav`, `w2swiss`, `bavswiss`) |
-| `scatterplot/` | Scatterplots of one offset metric against another within a dataset, dataset-vs-dataset for a given metric, a combined 4-dataset panel restricted to the 19 shared species, and parallel-coordinates plots across all four datasets |
-| `heatmaps/` | CCC and Pearson-r heatmaps with paired Bland–Altman panels, for the raw peak dates (pooled), the reference-offsets split by migratory strategy ("zugwise"), and the same split restricted to the 19 shared species ("common19") |
-| `histogram/` | Pooled histograms of reference-offsets across all species in all 4 datasets |
+| `dotplot/` | Per-species dot plots of reference-offsets and raw peak dates, one dot per dataset per species, for species common to all 4 datasets (root-level PDFs) and for each dataset pair (`w1bav`, `w1w2`, `w1swiss`, `w2bav`, `w2swiss`, `bavswiss`) |
+| `scatterplot/` | Scatterplots of one offset metric against another within a dataset (`Bavaria/`, `Swiss/`, `Württemberg/`, `Württemberg_2/`), dataset-vs-dataset for a given metric (`w1bav`, `w1w2`, `w1swiss`, `w2bav`, `w2swiss`, `bavswiss`), a combined 4-dataset panel restricted to the 19 shared species (`4datasets/`), parallel-coordinates plots across all four datasets (`parallel_coords/`), and PCA (`pca/`) / radar (`radar/`) views of the offset metrics |
+| `bland_altman/` | CCC and Pearson-r heatmaps with paired Bland–Altman panels (root-level PDFs + summary CSVs), for the raw peak dates (pooled, per dataset pair), the reference-offsets split by migratory strategy ("zugwise"), and the same split restricted to the 19 shared species ("common19") |
+| `histogram/` | Pooled histogram of reference-offsets across all species in all 4 datasets |
 
 ### Methods
 
@@ -476,6 +514,34 @@ Each regional analysis independently produces, per species, an expert reference 
 
 ```r
 install.packages(c("tidyverse", "lubridate", "mgcv", "RColorBrewer", "ggrepel", "scales"))
+```
+
+---
+
+## dashboard
+
+A Streamlit app that ties all five analyses and the cross-dataset comparison into one interactive viewer, rather than requiring readers to browse static files.
+
+### Contents
+
+| Tab | Description |
+|---|---|
+| **Overview** | Project description, the sub-project summary table, key results, and author/supervisor credits |
+| **Species Explorer** | Pick a dataset (Bavaria, Swiss migration, Swiss phenology, Württemberg 1, Württemberg 2) and a species; fits/loads its phenology curve live and plots it with Plotly, marking reference-date and peak lines and metrics |
+| **Cross-dataset Agreement** | Browses the pre-generated `acrossdata_results/` figures by category (dotplots, scatterplots, Bland–Altman, histograms), rendering PDFs inline via PyMuPDF |
+
+### Requirements
+
+```
+pip install -r dashboard/requirements.txt
+```
+(`streamlit`, `plotly`, `pandas`, `numpy`, `scikit-misc`, `pymupdf`)
+
+### Running the Dashboard
+
+```bash
+# From dashboard/
+streamlit run app.py
 ```
 
 ---
