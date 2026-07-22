@@ -1,0 +1,196 @@
+metric,zug,species_name,n_pairs_present,n_flagged,pairs_flagged,consistent_outlier
+ref_minus_breed,Lst,Saxicola rubetra,6,5,Württemberg vs Württemberg 2; Württemberg vs Bavaria; Württemberg vs Swiss; Württemberg 2 vs Bavaria; Württemberg 2 vs Swiss,FALSE
+ref_minus_breed,Kst,Accipiter nisus,6,2,Württemberg vs Württemberg 2; Württemberg 2 vs Bavaria,FALSE
+ref_minus_breed,Kst,Dendrocopos major,3,2,Württemberg vs Württemberg 2; Württemberg vs Bavaria,FALSE
+ref_minus_breed,Kst,Loxia curvirostra,3,2,Württemberg vs Württemberg 2; Württemberg vs Bavaria,FALSE
+ref_minus_breed,Kst,Motacilla alba,3,2,Württemberg vs Württemberg 2; Württemberg 2 vs Bavaria,FALSE
+ref_minus_breed,Kst,Strix aluco,6,1,Württemberg vs Württemberg 2,FALSE
+ref_minus_breed,Kst,Emberiza schoeniclus,3,1,Württemberg 2 vs Bavaria,FALSE
+ref_minus_breed,Kst,Passer domesticus,3,1,Württemberg vs Württemberg 2,FALSE
+ref_minus_breed,Lst,Coturnix coturnix,3,1,Bavaria vs Swiss,FALSE
+ref_minus_breed,Lst,Milvus migrans,3,1,Württemberg 2 vs Bavaria,FALSE
+ref_minus_breed,Kst,Fulica atra,1,1,Württemberg 2 vs Bavaria,FALSE
+ref_minus_breed,Kst,Prunella collaris,1,1,Bavaria vs Swiss,FALSE
+ref_minus_breed,Lst,Acrocephalus arundinaceus,1,1,Bavaria vs Swiss,FALSE
+ref_minus_breed,Kst,Alcedo atthis,6,0,,FALSE
+ref_minus_breed,Kst,Columba oenas,6,0,,FALSE
+ref_minus_breed,Kst,Falco peregrinus,6,0,,FALSE
+ref_minus_breed,Kst,Picus canus,6,0,,FALSE
+ref_minus_breed,Kst,Saxicola rubicola,6,0,,FALSE
+ref_minus_breed,Lst,Cuculus canorus,6,0,,FALSE
+ref_minus_breed,Lst,Falco subbuteo,6,0,,FALSE
+ref_minus_breed,Lst,Jynx torquilla,6,0,,FALSE
+ref_minus_breed,Lst,Locustella naevia,6,0,,FALSE
+ref_minus_breed,Lst,Luscinia megarhynchos,6,0,,FALSE
+ref_minus_breed,Lst,Oriolus oriolus,6,0,,FALSE
+ref_minus_breed,Lst,Phoenicurus phoenicurus,6,0,,FALSE
+ref_minus_breed,Lst,Streptopelia turtur,6,0,,FALSE
+ref_minus_breed,Kst,Aegithalos caudatus,3,0,,FALSE
+ref_minus_breed,Kst,Alauda arvensis,3,0,,FALSE
+ref_minus_breed,Kst,Anas platyrhynchos,3,0,,FALSE
+ref_minus_breed,Kst,Anthus pratensis,3,0,,FALSE
+ref_minus_breed,Kst,Carduelis carduelis,3,0,,FALSE
+ref_minus_breed,Kst,Columba palumbus,3,0,,FALSE
+ref_minus_breed,Kst,Corvus corax,3,0,,FALSE
+ref_minus_breed,Kst,Cyanistes caeruleus,3,0,,FALSE
+ref_minus_breed,Kst,Dryocopus martius,3,0,,FALSE
+ref_minus_breed,Kst,Emberiza citrinella,3,0,,FALSE
+ref_minus_breed,Kst,Erithacus rubecula,3,0,,FALSE
+ref_minus_breed,Kst,Falco tinnunculus,3,0,,FALSE
+ref_minus_breed,Kst,Fringilla coelebs,3,0,,FALSE
+ref_minus_breed,Kst,Gallinula chloropus,3,0,,FALSE
+ref_minus_breed,Kst,Lophophanes cristatus,3,0,,FALSE
+ref_minus_breed,Kst,Lullula arborea,3,0,,FALSE
+ref_minus_breed,Kst,Milvus milvus,3,0,,FALSE
+ref_minus_breed,Kst,Motacilla cinerea,3,0,,FALSE
+ref_minus_breed,Kst,Parus major,3,0,,FALSE
+ref_minus_breed,Kst,Passer montanus,3,0,,FALSE
+ref_minus_breed,Kst,Periparus ater,3,0,,FALSE
+ref_minus_breed,Kst,Phoenicurus ochruros,3,0,,FALSE
+ref_minus_breed,Kst,Phylloscopus collybita,3,0,,FALSE
+ref_minus_breed,Kst,Pica pica,3,0,,FALSE
+ref_minus_breed,Kst,Poecile palustris,3,0,,FALSE
+ref_minus_breed,Kst,Prunella modularis,3,0,,FALSE
+ref_minus_breed,Kst,Pyrrhula pyrrhula,3,0,,FALSE
+ref_minus_breed,Kst,Rallus aquaticus,3,0,,FALSE
+ref_minus_breed,Kst,Serinus serinus,3,0,,FALSE
+ref_minus_breed,Kst,Sitta europaea,3,0,,FALSE
+ref_minus_breed,Kst,Sturnus vulgaris,3,0,,FALSE
+ref_minus_breed,Kst,Turdus merula,3,0,,FALSE
+ref_minus_breed,Kst,Turdus philomelos,3,0,,FALSE
+ref_minus_breed,Kst,Turdus pilaris,3,0,,FALSE
+ref_minus_breed,Kst,Turdus viscivorus,3,0,,FALSE
+ref_minus_breed,Lst,Anthus trivialis,3,0,,FALSE
+ref_minus_breed,Lst,Apus apus,3,0,,FALSE
+ref_minus_breed,Lst,Delichon urbicum,3,0,,FALSE
+ref_minus_breed,Lst,Hirundo rustica,3,0,,FALSE
+ref_minus_breed,Lst,Lanius collurio,3,0,,FALSE
+ref_minus_breed,Lst,Pernis apivorus,3,0,,FALSE
+ref_minus_breed,Lst,Phylloscopus sibilatrix,3,0,,FALSE
+ref_minus_breed,Lst,Phylloscopus trochilus,3,0,,FALSE
+ref_minus_breed,Kst,Bubo bubo,1,0,,FALSE
+ref_minus_breed,Kst,Buteo buteo,1,0,,FALSE
+ref_minus_breed,Kst,Certhia brachydactyla,1,0,,FALSE
+ref_minus_breed,Kst,Certhia familiaris,1,0,,FALSE
+ref_minus_breed,Kst,Cinclus cinclus,1,0,,FALSE
+ref_minus_breed,Kst,Coccothraustes coccothraustes,1,0,,FALSE
+ref_minus_breed,Kst,Corvus corone,1,0,,FALSE
+ref_minus_breed,Kst,Cygnus olor,1,0,,FALSE
+ref_minus_breed,Kst,Emberiza calandra,1,0,,FALSE
+ref_minus_breed,Kst,Garrulus glandarius,1,0,,FALSE
+ref_minus_breed,Kst,Picoides tridactylus,1,0,,FALSE
+ref_minus_breed,Kst,Picus viridis,1,0,,FALSE
+ref_minus_breed,Kst,Podiceps cristatus,1,0,,FALSE
+ref_minus_breed,Kst,Poecile montanus,1,0,,FALSE
+ref_minus_breed,Kst,Regulus ignicapilla,1,0,,FALSE
+ref_minus_breed,Kst,Regulus regulus,1,0,,FALSE
+ref_minus_breed,Kst,Scolopax rusticola,1,0,,FALSE
+ref_minus_breed,Kst,Streptopelia decaocto,1,0,,FALSE
+ref_minus_breed,Kst,Sylvia atricapilla,1,0,,FALSE
+ref_minus_breed,Kst,Tetrao urogallus,1,0,,FALSE
+ref_minus_breed,Kst,Troglodytes troglodytes,1,0,,FALSE
+ref_minus_breed,Lst,Acrocephalus palustris,1,0,,FALSE
+ref_minus_breed,Lst,Ficedula hypoleuca,1,0,,FALSE
+ref_minus_breed,Lst,Hippolais icterina,1,0,,FALSE
+ref_minus_breed,Lst,Locustella luscinioides,1,0,,FALSE
+ref_minus_breed,Lst,Motacilla flava,1,0,,FALSE
+ref_minus_breed,Lst,Muscicapa striata,1,0,,FALSE
+ref_minus_breed,Lst,Sylvia borin,1,0,,FALSE
+ref_minus_mig,Kst,Accipiter nisus,6,1,Württemberg vs Württemberg 2,FALSE
+ref_minus_mig,Kst,Saxicola rubicola,6,1,Württemberg vs Württemberg 2,FALSE
+ref_minus_mig,Kst,Strix aluco,6,1,Bavaria vs Swiss,FALSE
+ref_minus_mig,Lst,Falco subbuteo,6,1,Württemberg 2 vs Bavaria,FALSE
+ref_minus_mig,Lst,Luscinia megarhynchos,6,1,Württemberg vs Württemberg 2,FALSE
+ref_minus_mig,Kst,Gallinula chloropus,3,1,Württemberg vs Bavaria,FALSE
+ref_minus_mig,Kst,Lophophanes cristatus,3,1,Württemberg vs Württemberg 2,FALSE
+ref_minus_mig,Lst,Lanius collurio,3,1,Württemberg 2 vs Bavaria,FALSE
+ref_minus_mig,Lst,Pernis apivorus,3,1,Württemberg 2 vs Swiss,FALSE
+ref_minus_mig,Kst,Prunella collaris,1,1,Bavaria vs Swiss,FALSE
+ref_minus_mig,Lst,Locustella luscinioides,1,1,Bavaria vs Swiss,FALSE
+ref_minus_mig,Kst,Alcedo atthis,6,0,,FALSE
+ref_minus_mig,Kst,Columba oenas,6,0,,FALSE
+ref_minus_mig,Kst,Falco peregrinus,6,0,,FALSE
+ref_minus_mig,Kst,Picus canus,6,0,,FALSE
+ref_minus_mig,Lst,Cuculus canorus,6,0,,FALSE
+ref_minus_mig,Lst,Jynx torquilla,6,0,,FALSE
+ref_minus_mig,Lst,Locustella naevia,6,0,,FALSE
+ref_minus_mig,Lst,Oriolus oriolus,6,0,,FALSE
+ref_minus_mig,Lst,Phoenicurus phoenicurus,6,0,,FALSE
+ref_minus_mig,Lst,Saxicola rubetra,6,0,,FALSE
+ref_minus_mig,Lst,Streptopelia turtur,6,0,,FALSE
+ref_minus_mig,Kst,Aegithalos caudatus,3,0,,FALSE
+ref_minus_mig,Kst,Alauda arvensis,3,0,,FALSE
+ref_minus_mig,Kst,Anas platyrhynchos,3,0,,FALSE
+ref_minus_mig,Kst,Anthus pratensis,3,0,,FALSE
+ref_minus_mig,Kst,Carduelis carduelis,3,0,,FALSE
+ref_minus_mig,Kst,Columba palumbus,3,0,,FALSE
+ref_minus_mig,Kst,Corvus corax,3,0,,FALSE
+ref_minus_mig,Kst,Cyanistes caeruleus,3,0,,FALSE
+ref_minus_mig,Kst,Dendrocopos major,3,0,,FALSE
+ref_minus_mig,Kst,Dryocopus martius,3,0,,FALSE
+ref_minus_mig,Kst,Emberiza citrinella,3,0,,FALSE
+ref_minus_mig,Kst,Emberiza schoeniclus,3,0,,FALSE
+ref_minus_mig,Kst,Erithacus rubecula,3,0,,FALSE
+ref_minus_mig,Kst,Falco tinnunculus,3,0,,FALSE
+ref_minus_mig,Kst,Fringilla coelebs,3,0,,FALSE
+ref_minus_mig,Kst,Loxia curvirostra,3,0,,FALSE
+ref_minus_mig,Kst,Lullula arborea,3,0,,FALSE
+ref_minus_mig,Kst,Milvus milvus,3,0,,FALSE
+ref_minus_mig,Kst,Motacilla alba,3,0,,FALSE
+ref_minus_mig,Kst,Motacilla cinerea,3,0,,FALSE
+ref_minus_mig,Kst,Parus major,3,0,,FALSE
+ref_minus_mig,Kst,Passer domesticus,3,0,,FALSE
+ref_minus_mig,Kst,Passer montanus,3,0,,FALSE
+ref_minus_mig,Kst,Periparus ater,3,0,,FALSE
+ref_minus_mig,Kst,Phoenicurus ochruros,3,0,,FALSE
+ref_minus_mig,Kst,Phylloscopus collybita,3,0,,FALSE
+ref_minus_mig,Kst,Pica pica,3,0,,FALSE
+ref_minus_mig,Kst,Poecile palustris,3,0,,FALSE
+ref_minus_mig,Kst,Prunella modularis,3,0,,FALSE
+ref_minus_mig,Kst,Pyrrhula pyrrhula,3,0,,FALSE
+ref_minus_mig,Kst,Rallus aquaticus,3,0,,FALSE
+ref_minus_mig,Kst,Serinus serinus,3,0,,FALSE
+ref_minus_mig,Kst,Sitta europaea,3,0,,FALSE
+ref_minus_mig,Kst,Sturnus vulgaris,3,0,,FALSE
+ref_minus_mig,Kst,Turdus merula,3,0,,FALSE
+ref_minus_mig,Kst,Turdus philomelos,3,0,,FALSE
+ref_minus_mig,Kst,Turdus pilaris,3,0,,FALSE
+ref_minus_mig,Kst,Turdus viscivorus,3,0,,FALSE
+ref_minus_mig,Lst,Anthus trivialis,3,0,,FALSE
+ref_minus_mig,Lst,Apus apus,3,0,,FALSE
+ref_minus_mig,Lst,Coturnix coturnix,3,0,,FALSE
+ref_minus_mig,Lst,Delichon urbicum,3,0,,FALSE
+ref_minus_mig,Lst,Hirundo rustica,3,0,,FALSE
+ref_minus_mig,Lst,Milvus migrans,3,0,,FALSE
+ref_minus_mig,Lst,Phylloscopus sibilatrix,3,0,,FALSE
+ref_minus_mig,Lst,Phylloscopus trochilus,3,0,,FALSE
+ref_minus_mig,Kst,Bubo bubo,1,0,,FALSE
+ref_minus_mig,Kst,Buteo buteo,1,0,,FALSE
+ref_minus_mig,Kst,Certhia brachydactyla,1,0,,FALSE
+ref_minus_mig,Kst,Certhia familiaris,1,0,,FALSE
+ref_minus_mig,Kst,Cinclus cinclus,1,0,,FALSE
+ref_minus_mig,Kst,Coccothraustes coccothraustes,1,0,,FALSE
+ref_minus_mig,Kst,Corvus corone,1,0,,FALSE
+ref_minus_mig,Kst,Cygnus olor,1,0,,FALSE
+ref_minus_mig,Kst,Emberiza calandra,1,0,,FALSE
+ref_minus_mig,Kst,Fulica atra,1,0,,FALSE
+ref_minus_mig,Kst,Garrulus glandarius,1,0,,FALSE
+ref_minus_mig,Kst,Picoides tridactylus,1,0,,FALSE
+ref_minus_mig,Kst,Picus viridis,1,0,,FALSE
+ref_minus_mig,Kst,Podiceps cristatus,1,0,,FALSE
+ref_minus_mig,Kst,Poecile montanus,1,0,,FALSE
+ref_minus_mig,Kst,Regulus ignicapilla,1,0,,FALSE
+ref_minus_mig,Kst,Regulus regulus,1,0,,FALSE
+ref_minus_mig,Kst,Scolopax rusticola,1,0,,FALSE
+ref_minus_mig,Kst,Streptopelia decaocto,1,0,,FALSE
+ref_minus_mig,Kst,Sylvia atricapilla,1,0,,FALSE
+ref_minus_mig,Kst,Tetrao urogallus,1,0,,FALSE
+ref_minus_mig,Kst,Troglodytes troglodytes,1,0,,FALSE
+ref_minus_mig,Lst,Acrocephalus arundinaceus,1,0,,FALSE
+ref_minus_mig,Lst,Acrocephalus palustris,1,0,,FALSE
+ref_minus_mig,Lst,Carpodacus erythrinus,1,0,,FALSE
+ref_minus_mig,Lst,Ficedula hypoleuca,1,0,,FALSE
+ref_minus_mig,Lst,Hippolais icterina,1,0,,FALSE
+ref_minus_mig,Lst,Motacilla flava,1,0,,FALSE
+ref_minus_mig,Lst,Muscicapa striata,1,0,,FALSE
+ref_minus_mig,Lst,Sylvia borin,1,0,,FALSE

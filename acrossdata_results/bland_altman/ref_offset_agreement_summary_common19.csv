@@ -1,0 +1,33 @@
+metric,zug,species_name,n_pairs_present,n_flagged,pairs_flagged,consistent_outlier
+ref_minus_breed,Lst,Saxicola rubetra,6,4,Württemberg vs Bavaria; Württemberg vs Swiss; Württemberg 2 vs Bavaria; Württemberg 2 vs Swiss,FALSE
+ref_minus_breed,Kst,Accipiter nisus,6,0,,FALSE
+ref_minus_breed,Kst,Alcedo atthis,6,0,,FALSE
+ref_minus_breed,Kst,Columba oenas,6,0,,FALSE
+ref_minus_breed,Kst,Falco peregrinus,6,0,,FALSE
+ref_minus_breed,Kst,Picus canus,6,0,,FALSE
+ref_minus_breed,Kst,Saxicola rubicola,6,0,,FALSE
+ref_minus_breed,Kst,Strix aluco,6,0,,FALSE
+ref_minus_breed,Lst,Cuculus canorus,6,0,,FALSE
+ref_minus_breed,Lst,Falco subbuteo,6,0,,FALSE
+ref_minus_breed,Lst,Jynx torquilla,6,0,,FALSE
+ref_minus_breed,Lst,Locustella naevia,6,0,,FALSE
+ref_minus_breed,Lst,Luscinia megarhynchos,6,0,,FALSE
+ref_minus_breed,Lst,Oriolus oriolus,6,0,,FALSE
+ref_minus_breed,Lst,Phoenicurus phoenicurus,6,0,,FALSE
+ref_minus_breed,Lst,Streptopelia turtur,6,0,,FALSE
+ref_minus_mig,Lst,Falco subbuteo,6,3,Württemberg vs Bavaria; Württemberg 2 vs Bavaria; Bavaria vs Swiss,FALSE
+ref_minus_mig,Kst,Accipiter nisus,6,0,,FALSE
+ref_minus_mig,Kst,Alcedo atthis,6,0,,FALSE
+ref_minus_mig,Kst,Columba oenas,6,0,,FALSE
+ref_minus_mig,Kst,Falco peregrinus,6,0,,FALSE
+ref_minus_mig,Kst,Picus canus,6,0,,FALSE
+ref_minus_mig,Kst,Saxicola rubicola,6,0,,FALSE
+ref_minus_mig,Kst,Strix aluco,6,0,,FALSE
+ref_minus_mig,Lst,Cuculus canorus,6,0,,FALSE
+ref_minus_mig,Lst,Jynx torquilla,6,0,,FALSE
+ref_minus_mig,Lst,Locustella naevia,6,0,,FALSE
+ref_minus_mig,Lst,Luscinia megarhynchos,6,0,,FALSE
+ref_minus_mig,Lst,Oriolus oriolus,6,0,,FALSE
+ref_minus_mig,Lst,Phoenicurus phoenicurus,6,0,,FALSE
+ref_minus_mig,Lst,Saxicola rubetra,6,0,,FALSE
+ref_minus_mig,Lst,Streptopelia turtur,6,0,,FALSE
