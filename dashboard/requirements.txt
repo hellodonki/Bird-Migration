@@ -1,6 +1,0 @@
-streamlit
-plotly
-pandas
-numpy
-scikit-misc
-pymupdf

@@ -30,8 +30,6 @@ A final question extends this across datasets: do the answers to (1) and (2) hol
 | [`wuerttemberg_2/`](wuerttemberg_2/) | Baden-Württemberg MhB/Ornitho — behavioural codes (2020–25) | 99 |
 | [`acrossdata_results/`](acrossdata_results/) | Cross-dataset comparison of the four analyses above | 19 shared species |
 
-A Streamlit dashboard ([`dashboard/`](dashboard/)) ties all five analyses together in one interactive viewer — see the [`dashboard`](#dashboard) section below.
-
 ## Key Results
 
 **Bavaria** — Across 111 species with full phenological metrics, expert reference dates fall a median of 12 days before the observed 50%-departure date — consistent with references marking active passage. For 59 of 87 species the reference date aligns with ongoing migration; the remaining 28 show reference dates lagging the observed passage window.
@@ -135,29 +133,20 @@ Bird-Migration/
 │           ├── all_vs_migrants.png
 │           └── migrant_proportion_higher_max.png
 │
-├── acrossdata_results/                  # Cross-dataset agreement figures (Bavaria, Swiss, Württemberg 1 & 2)
-│   ├── dotplot/                         # Per-species reference-offset & peak-date dot plots
-│   │   ├── phenology_peaks_dotplot.pdf · phenology_peaks_dotplot_shared.pdf · dotplot_common19.pdf
-│   │   └── [w1bav | w1w2 | w1swiss | w2bav | w2swiss | bavswiss]/
-│   ├── scatterplot/                     # Pairwise, pooled, and dimensionality-reduction views
-│   │   ├── 4datasets/                   # Pooled scatterplots across the 19 shared species
-│   │   ├── parallel_coords/             # Parallel-coordinates plots across all four datasets
-│   │   ├── pca/                         # PCA biplots of offset metrics
-│   │   ├── radar/                       # Radar/spider charts of offset metrics
-│   │   ├── [Bavaria | Swiss | Württemberg | Württemberg_2]/  # Within-dataset metric-vs-metric scatterplots
-│   │   └── [w1bav | w1w2 | w1swiss | w2bav | w2swiss | bavswiss]/  # Pairwise dataset-vs-dataset scatterplots
-│   ├── bland_altman/                    # CCC / Bland–Altman agreement (pooled, zugwise, common19 — summary CSVs + PDFs at root)
-│   │   └── [bavswiss | w1bav | w1swiss | w1w2 | w2bav | w2swiss]/  # Per-pair Bland–Altman plots
-│   └── histogram/                       # Pooled reference-offset histogram across all 4 datasets
-│
-└── dashboard/                            # Streamlit viewer over all five analyses + cross-dataset comparison
-    ├── app.py
-    ├── requirements.txt
-    └── utils/
-        ├── datasets.py                  # Per-dataset species list / phenology-curve loaders
-        ├── de_to_sci.py                 # German common-name → scientific-name lookup (mirrors wuerttemberg_1 naming)
-        ├── paths.py                     # Path constants for each sub-project's output folders
-        └── smoothers.py                 # LOESS/GAM helpers for the live "Species Explorer" tab
+└── acrossdata_results/                  # Cross-dataset agreement figures (Bavaria, Swiss, Württemberg 1 & 2)
+    ├── dotplot/                         # Per-species reference-offset & peak-date dot plots
+    │   ├── phenology_peaks_dotplot.pdf · phenology_peaks_dotplot_shared.pdf · dotplot_common19.pdf
+    │   └── [w1bav | w1w2 | w1swiss | w2bav | w2swiss | bavswiss]/
+    ├── scatterplot/                     # Pairwise, pooled, and dimensionality-reduction views
+    │   ├── 4datasets/                   # Pooled scatterplots across the 19 shared species
+    │   ├── parallel_coords/             # Parallel-coordinates plots across all four datasets
+    │   ├── pca/                         # PCA biplots of offset metrics
+    │   ├── radar/                       # Radar/spider charts of offset metrics
+    │   ├── [Bavaria | Swiss | Württemberg | Württemberg_2]/  # Within-dataset metric-vs-metric scatterplots
+    │   └── [w1bav | w1w2 | w1swiss | w2bav | w2swiss | bavswiss]/  # Pairwise dataset-vs-dataset scatterplots
+    ├── bland_altman/                    # CCC / Bland–Altman agreement (pooled, zugwise, common19 — summary CSVs + PDFs at root)
+    │   └── [bavswiss | w1bav | w1swiss | w1w2 | w2bav | w2swiss]/  # Per-pair Bland–Altman plots
+    └── histogram/                       # Pooled reference-offset histogram across all 4 datasets
 ```
 
 ---
@@ -386,7 +375,7 @@ Analysis of bird phenology in Baden-Württemberg using the "Monitoring häufiger
 
 ### Background
 
-The raw MhB survey table nominally spans 2006–2023, but every record from 2006–2017 has an empty date field and is dropped during cleaning — so the usable analysis window is effectively **2018–2023**. Site classification here does not rely on a fixed atlas code but on behavioural flags recorded at each visit (singing, warning/alarm calls, aggressive territorial interactions, nesting material, feeding of young, active nests, juveniles, and territory records); a site is treated as a confirmed-breeding site for a species if any visit across the whole period shows one of these flags. Per-species curves are fitted with a GAM (`species_gam.R`) and benchmarked against the same expert reference dates used in `bavaria_migration`, joined via a German common-name → scientific-name lookup (`dashboard/utils/de_to_sci.py` holds the canonical mapping). Output folders and species names use the German common names directly (e.g. `Amsel`, `Rotkehlchen`). Species are further split into short-distance (`Kst`, 47 species) and long-distance (`Lst`, 17 species) migrants using a Swiss species-trait reference table, since the two strategies are expected to show different passage timing and different agreement with the reference dates; one species (`Rebhuhn`, grey partridge) sits outside this split in a flat top-level folder.
+The raw MhB survey table nominally spans 2006–2023, but every record from 2006–2017 has an empty date field and is dropped during cleaning — so the usable analysis window is effectively **2018–2023**. Site classification here does not rely on a fixed atlas code but on behavioural flags recorded at each visit (singing, warning/alarm calls, aggressive territorial interactions, nesting material, feeding of young, active nests, juveniles, and territory records); a site is treated as a confirmed-breeding site for a species if any visit across the whole period shows one of these flags. Per-species curves are fitted with a GAM (`species_gam.R`) and benchmarked against the same expert reference dates used in `bavaria_migration`, joined via a German common-name → scientific-name lookup. Output folders and species names use the German common names directly (e.g. `Amsel`, `Rotkehlchen`). Species are further split into short-distance (`Kst`, 47 species) and long-distance (`Lst`, 17 species) migrants using a Swiss species-trait reference table, since the two strategies are expected to show different passage timing and different agreement with the reference dates; one species (`Rebhuhn`, grey partridge) sits outside this split in a flat top-level folder.
 
 ### Data
 
@@ -514,34 +503,6 @@ Each regional analysis independently produces, per species, an expert reference 
 
 ```r
 install.packages(c("tidyverse", "lubridate", "mgcv", "RColorBrewer", "ggrepel", "scales"))
-```
-
----
-
-## dashboard
-
-A Streamlit app that ties all five analyses and the cross-dataset comparison into one interactive viewer, rather than requiring readers to browse static files.
-
-### Contents
-
-| Tab | Description |
-|---|---|
-| **Overview** | Project description, the sub-project summary table, key results, and author/supervisor credits |
-| **Species Explorer** | Pick a dataset (Bavaria, Swiss migration, Swiss phenology, Württemberg 1, Württemberg 2) and a species; fits/loads its phenology curve live and plots it with Plotly, marking reference-date and peak lines and metrics |
-| **Cross-dataset Agreement** | Browses the pre-generated `acrossdata_results/` figures by category (dotplots, scatterplots, Bland–Altman, histograms), rendering PDFs inline via PyMuPDF |
-
-### Requirements
-
-```
-pip install -r dashboard/requirements.txt
-```
-(`streamlit`, `plotly`, `pandas`, `numpy`, `scikit-misc`, `pymupdf`)
-
-### Running the Dashboard
-
-```bash
-# From dashboard/
-streamlit run app.py
 ```
 
 ---

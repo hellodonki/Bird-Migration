@@ -10,3 +10,6 @@
 *.xlsx
 databb.csv
 
+# Not published for now
+dashboard/
+
