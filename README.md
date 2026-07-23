@@ -1,40 +1,94 @@
-# Bird Migration Analysis — Summer Research 2026
+# Re-evaluating Swiss reference dates and studying phenological shifts using four independent regional monitoring datasets
 
-R pipelines for separating breeding and migratory bird populations in large-scale monitoring datasets and tracking long-term phenological trends in timing of migration.
+R pipelines for separating breeding and migratory bird populations in large-scale monitoring datasets, re-evaluating the Swiss *Stichdatum* (reference date) system against them, and tracking long-term phenological trends in migration timing.
 
-**Author:** Swastik Mandal, IISER Pune &nbsp;·&nbsp;  
-**Supervisor:** Nicolas Strebel, Swiss Ornithological Institute
+**Authors:** Swastik Mandal¹, Nicolas Strebel²
+&nbsp;·&nbsp; ¹ Indian Institute of Science Education and Research (IISER), Pune, India &nbsp;·&nbsp; ² Swiss Ornithological Institute, Sempach, Switzerland
+&nbsp;·&nbsp; Correspondence: [swastik.mandal@students.iiserpune.ac.in](mailto:swastik.mandal@students.iiserpune.ac.in)
+
+**Full write-up:** [`phenology_report.pdf`](phenology_report.pdf) (report) &nbsp;·&nbsp; [`final_presentation.pdf`](final_presentation.pdf) (slides)
 
 ---
 
 ## Overview
 
-Standardised bird monitoring schemes count breeding residents and passage migrants together, making it hard to interpret raw counts in terms of either group. Four regional analyses (Bavaria, Swiss MHB, and two independent Baden-Württemberg surveys) use atlas-code or behavioural-evidence-based site classification to split observations into breeding and non-breeding components, fit smoothed (LOESS and/or GAM) phenological curves to each subset, and extract key timing metrics. A fifth analysis (`swissdata_phenology`) tracks how those metrics have shifted across nearly two decades of Swiss data, and a sixth (`acrossdata_results`) checks whether the metrics and reference-date offsets from the four regional analyses agree with one another.
+Central European monitoring schemes count breeding residents and passage migrants together at the same sites, which makes raw counts hard to interpret in terms of either group. To limit this, schemes such as the Swiss MHB define a species-specific **reference date** (*Stichdatum*, RD) — nominally the date after which breeders are expected to dominate counts over passage migrants — so that surveys conducted after the RD estimate breeding populations, not migration. Current RDs were fixed in the 1990s from field knowledge and the limited data available at the time.
 
-The objective is to re-evaluate reference dates laid out in Swiss ornithological surveys (spoken of as 'stichdatum') by checking for the departure of migrants, settling of breeders ('residents') and the change in phenological patterns across years. The notion is such that avian migration time-periods have undergone some amount of change since the initial definition of the surveying periods in the '90s (for instance, a migrants' peak slope of -0.3 in 2026 would mean that migrants are departing 3 days earlier than they did in 2016). 
+Two lines of evidence suggest these RDs may now be outdated. First, climate-driven shifts in food phenology have been shown to move the migration timing of long-distance migrants, with short- and long-distance migrants responding differently. Second, national monitoring schemes across Central Europe have since accumulated multi-decade time series with far greater empirical resolution than was available when the RDs were first set. No systematic re-evaluation of the RDs using this accumulated data has been done — nor has it been asked whether such a re-evaluation would even reproduce if repeated independently in a neighbouring region.
 
-Broadly, I have used data from the regions of Bavaria, Baden-Wuerttemberg and the information logged onto ornitho.ch for different time periods. Although the datasets showed considerable variation in regard to how it is stored (in terms of variables, time-periods, behaviour indicators), it was useful to lay down a foundational basis of differentiation between migrant and breeding individuals (or, sites), using relevant relational algebra expressions. Following that, similar metrics (breeding peaks, migrant threshold, etc) were put to test, to answer the following three questions, at both within and across-species levels:
+This project re-evaluates the RDs using **four independent regional monitoring datasets** — Bavaria, two independent Baden-Württemberg surveys, and Switzerland — that differ in spatial/temporal coverage and in how they classify breeding vs. non-breeding sites, but share a common structure: repeated site visits through spring produce abundance counts that can be split into breeding and passage-migrant components. Each regional analysis fits smoothed phenological curves (LOESS or GAM) to the two components and extracts key timing metrics; a fifth analysis (`swissdata_phenology`) tracks how those metrics shift across nearly two decades of Swiss data, and a sixth (`acrossdata_results`) checks whether the four regional analyses agree with each other for species they share.
 
-(1) How do the breeders' peak dates compare with the reference dates? 
-(2) Do the reference dates compare well with the departure of migrants? 
-(3) Have these indicators (peaks/thresholds of migrants/breeders) considerably changed across years?
+### Objectives
 
-A final question extends this across datasets: do the answers to (1) and (2) hold up consistently when the same species is monitored by four independent surveys?
+**Q1.** How do empirically estimated breeder-peak dates compare with the established reference dates?
+**Q2.** Do the reference dates correspond to the departure of passage migrants, as intended?
+**Q3.** Have breeder and migrant peak dates shifted over the years?
+**Q4.** Are the answers to Q1–Q3 consistent across four independently collected datasets?
 
-| Sub-project | Dataset | Species | 
-|---|---|---|
-| [`bavaria_migration/`](bavaria_migration/) | Bavarian MhB — territory records | 138 | 
-| [`swissdata_migration/`](swissdata_migration/) | Swiss MHB — atlas codes (2021–25) | 84 | 
-| [`swissdata_phenology/`](swissdata_phenology/) | Swiss MHB — atlas codes (2007–25) | 83 | 
-| [`wuerttemberg_1/`](wuerttemberg_1/) | Baden-Württemberg MhB — behavioural codes (2018–23) | ~130 |
-| [`wuerttemberg_2/`](wuerttemberg_2/) | Baden-Württemberg MhB/Ornitho — behavioural codes (2020–25) | 99 |
-| [`acrossdata_results/`](acrossdata_results/) | Cross-dataset comparison of the four analyses above | 19 shared species |
+By addressing these at within-species, across-species, and across-dataset levels, the goal is to provide an empirical basis for revising RDs and for incorporating phenological trends and cross-dataset robustness into future survey-protocol design.
+
+### Datasets
+
+| Dataset | Region | Years | Sites | Species | Classification |
+|---|---|---|---|---|---|
+| [`bavaria_migration/`](bavaria_migration/) | Bavaria, DE | 2020–2024 | 244 | 138 processed (111–116 with RDs) | Territory count > 0 |
+| [`swissdata_migration/`](swissdata_migration/) | Switzerland | 2021–2025 | 1 km² grid | 82–84 | Atlas code ≥ 4 and < 20, or = 50; 5 km buffer |
+| [`swissdata_phenology/`](swissdata_phenology/) | Switzerland | 2007–2025 (15 windows) | 1 km² grid | 80–83 | Atlas code ≥ 4 and < 20, or = 50; 5 km buffer |
+| [`wuerttemberg_1/`](wuerttemberg_1/) | Baden-Württemberg, DE | 2018–2023 | 303 | 130 (47 Kst / 17 Lst) | Behavioural codes, pooled across years |
+| [`wuerttemberg_2/`](wuerttemberg_2/) | Baden-Württemberg, DE (Ornitho) | 2020–2025 | 342 | 134 (69 Kst / 28 Lst) | Atlas code B/C prefix, pooled across years |
+| [`acrossdata_results/`](acrossdata_results/) | Cross-dataset comparison of the four regional analyses above | — | — | 16–19 shared species | Kst/Lst split, pairwise CCC & Bland–Altman |
+
+*Kst = short-distance migrant, Lst = long-distance migrant (Swiss species-trait classification). Baden-Württemberg I's raw archive spans 2006–2023, but every record before 2018 lacks a valid survey date, so the usable window is 2018–2023 — considerably shorter than the Swiss trend series.*
 
 ## Key Results
 
-**Bavaria** — Across 111 species with full phenological metrics, expert reference dates fall a median of 12 days before the observed 50%-departure date — consistent with references marking active passage. For 59 of 87 species the reference date aligns with ongoing migration; the remaining 28 show reference dates lagging the observed passage window.
+The clearest, most uniform signal across every dataset and migratory strategy is that **reference dates do not reliably exclude the tail of the migrant wave**: `RD − migrant-50%-departure` is consistently negative (Table below), meaning surveys starting at the RD still catch a substantial residual migrant component — precisely the bias the RD was designed to avoid. This was the least ambiguous of the three within-dataset questions.
 
-**Swiss phenology** — Over the 2007–2025 period, 72% of migrant species (60/83) show advancing peak timing, against 61% of breeders (51/83). The community-wide mean shift is **−0.62 days yr⁻¹** for migrants and **−0.48 days yr⁻¹** for breeders — roughly 11 and 9 days of advancement over the study period — with migrants advancing slightly faster on average.
+For **breeder phenology**, the picture depends on migratory strategy: long-distance migrants (Lst) show a robust, cross-validated pattern where the breeder peak consistently arrives *after* the RD (so the RD does capture the true peak); short-distance migrants (Kst) show genuinely mixed, region-dependent results — Bavaria and Swiss agree the RD captures the peak, but both Baden-Württemberg datasets disagree.
+
+For **long-term trends**, the 2007–2025 Swiss series (80 species) shows short-distance migrants advancing both breeder and migrant peaks, while long-distance migrants show a divergent pattern: migration timing advances (−0.19 days yr⁻¹) but breeding activity is slightly delayed (+0.15 days yr⁻¹).
+
+For **cross-dataset agreement (Q4)**, long-distance migrants are far easier to classify consistently: median pairwise correlation across the four datasets is **r = 0.65** for migrant-peak DOY in Lst species vs. essentially **r = 0.07** for Kst species. No species were flagged as consistent outliers — disagreement among short-distance migrants is diffuse, reflecting genuinely noisier signals rather than a handful of problem species.
+
+| Ref − breeder peak | Ref − migrant peak | Ref − migrant 50% departure |
+|---|---|---|
+| Median (IQR) in days, negative = RD precedes the event | | |
+| Lst: consistently negative (RD *follows* breeder peak) across all 4 datasets | Roughly even split, Lst skews negative | **Negative in every dataset & strategy** — the most consistent finding of the study |
+| Kst: mixed sign, dataset-dependent | | |
+
+*(Full per-dataset/per-strategy medians are in [Table 5 of the report](phenology_report.pdf), p. 17.)*
+
+### Two case studies: a short- and a long-distance migrant
+
+*Picus canus* (grey-headed woodpecker, **Kst**, RD = DOY 51 / 20 Feb) and *Jynx torquilla* (Eurasian wryneck, **Lst**, RD = DOY 122 / 2 May) were monitored by all four surveys and illustrate the Kst/Lst contrast described above.
+
+**Picus canus** — breeder-peak estimates range DOY 70–88 and migrant-peak DOY 69–90 across the four datasets; all four agree the RD (day 51) arrives well *before* both peaks:
+
+| Dataset | Breeder peak DOY | Migrant peak DOY | Ref − breeder peak | Ref − migrant peak |
+|---|---|---|---|---|
+| Bavaria | 81 | 70 | −30 | −19 |
+| Swiss migration | 73 | 83 | −22 | −32 |
+| Baden-Württemberg I | 70 | 69 | −19 | −18 |
+| Baden-Württemberg II | 88 | 90 | −37 | −39 |
+
+| ![Bavaria — Picus canus](bavaria_migration/output/species_outputs/Picus_canus/all_vs_nonbreeders.png) | ![Baden-Württemberg I — Grauspecht](wuerttemberg_1/species_outputs_loess_visitbased/Kst/Grauspecht/Grauspecht_all_vs_migrants_fit_check.png) | ![Swiss phenology trend — Picus canus](swissdata_phenology/species_phenology3/Kst/Picus_canus/Picus_canus_trend.png) |
+|---|---|---|
+| Bavaria: all-sites vs. non-breeding curves | Baden-Württemberg I (*Grauspecht*): all-sites vs. migrant GAM fit | Swiss 2007–2025 trend: breeder peak advancing markedly, migrant peak only slightly |
+
+**Jynx torquilla** — a tighter cross-dataset agreement: breeder-peak estimates span only 12 days and migrant-peak only 9 days across the four surveys:
+
+| Dataset | Breeder peak DOY | Migrant peak DOY | Ref − breeder peak | Ref − migrant peak |
+|---|---|---|---|---|
+| Bavaria | 122 | 109 | 0 | 13 |
+| Swiss migration | 113 | 113 | −9 | −9 |
+| Baden-Württemberg I | 110 | 117 | −12 | −5 |
+| Baden-Württemberg II | 113 | 118 | −9 | −4 |
+
+| ![Bavaria — Jynx torquilla](bavaria_migration/output/species_outputs/Jynx_torquilla/all_vs_nonbreeders.png) | ![Baden-Württemberg I — Wendehals](wuerttemberg_1/species_outputs_loess_visitbased/Lst/Wendehals/Wendehals_all_vs_migrants_fit_check.png) | ![Swiss phenology trend — Jynx torquilla](swissdata_phenology/species_phenology3/Lst/Jynx_torquilla/Jynx_torquilla_trend.png) |
+|---|---|---|
+| Bavaria: all-sites vs. non-breeding curves | Baden-Württemberg I (*Wendehals*): all-sites vs. migrant GAM fit | Swiss 2007–2025 trend: both peaks essentially flat |
+
+The full cross-dataset agreement heatmaps (CCC / Pearson r by metric and Kst/Lst), Bland–Altman panels, and the 16-species-common-to-all-four dot plots are in [`acrossdata_results/`](acrossdata_results/) and reproduced in the [report](phenology_report.pdf), Section 4.
 
 ---
 
@@ -493,11 +547,26 @@ Each regional analysis independently produces, per species, an expert reference 
 
 **2. Dot plots and scatterplots** — Reference-offsets and raw peak dates are compared per species across datasets (all-four and pairwise), and one offset metric is plotted against another to check internal consistency within and across datasets.
 
-**3. Concordance (CCC) and Bland–Altman analysis** — For every dataset pair, Lin's CCC (with a 2000-resample bootstrap confidence interval) and a classic Bland–Altman bias/limits-of-agreement analysis are computed for the raw peak dates (pooled across migratory strategy) and separately for the reference-offsets split by `Kst`/`Lst` ("zugwise"), plus a version restricted to the 19 species shared by all four datasets ("common19"). Species that fall outside the limits of agreement in every pairwise comparison they appear in are flagged as consistent outliers.
+**3. Concordance (CCC) and Bland–Altman analysis** — For every dataset pair, Lin's concordance correlation coefficient
+
+$$\mathrm{CCC} = \frac{2\,\sigma_{xy}}{\sigma_x^2 + \sigma_y^2 + (\mu_x - \mu_y)^2}$$
+
+(with a 2000-resample bootstrap 95% confidence interval) and a classic Bland–Altman bias/limits-of-agreement analysis are computed for the raw peak dates (pooled across migratory strategy) and separately for the reference-offsets split by `Kst`/`Lst` ("zugwise"), plus a version restricted to the species shared by all four datasets ("common19"). Species that fall outside the limits of agreement in every pairwise comparison they appear in are flagged as consistent outliers — in practice, none are: disagreement among short-distance migrants is diffuse across the whole Kst pool rather than driven by a handful of species.
 
 | ![Reference vs breeder-peak offset, 4 datasets](acrossdata_results/scatterplot/4datasets/scatter_ref_minus_breedpeak.png) | ![Reference vs migrant-peak offset, 4 datasets](acrossdata_results/scatterplot/4datasets/scatter_ref_minus_migpeak.png) |
 |---|---|
-| Reference-minus-breeder-peak offset across all 4 datasets (19 shared species) | Reference-minus-migrant-peak offset across all 4 datasets (19 shared species) |
+| Reference-minus-breeder-peak offset across all 4 datasets (shared species) | Reference-minus-migrant-peak offset across all 4 datasets (shared species) |
+
+**Median pairwise Pearson r across the six dataset-pair comparisons, by metric and migratory strategy** (species common to all four datasets):
+
+| Metric | Kst | Lst |
+|---|---|---|
+| Migrant peak DOY | 0.07 | 0.65 |
+| Breeder peak DOY | 0.46 | 0.51 |
+| Ref − migrant peak | 0.28 | 0.74 |
+| Ref − breeder peak | 0.59 | 0.66 |
+
+Long-distance migrants agree far more consistently across independently collected datasets than short-distance migrants do, for every metric — most starkly for migrant-peak DOY (r = 0.65 vs. 0.07).
 
 ### Requirements
 
@@ -507,6 +576,24 @@ install.packages(c("tidyverse", "lubridate", "mgcv", "RColorBrewer", "ggrepel", 
 
 ---
 
+## Conclusions
+
+**Q1 — Breeder phenology.** Whether the RD precedes or follows peak breeding activity depends on migratory strategy. Long-distance migrants show a robust, cross-validated pattern: breeder-peak DOY consistently arrives after the RD, so the RD captures a true peak. Short-distance migrants show genuinely mixed, region-dependent results — Bavaria and Swiss agree the RD captures the peak, Baden-Württemberg I and II mostly disagree — suggesting any Kst revision may need to be spatially calibrated rather than uniform.
+
+**Q2 — Migrant phenology.** RDs fail to align with migrant *departure* in almost every dataset and migratory-strategy category: `RD − migrant-50%` is consistently negative, meaning surveys starting at the RD still include a substantial residual migrant component — the exact bias the RD concept was meant to avoid. This is the least ambiguous, most uniformly reproduced finding of the study.
+
+**Q3 — Long-term trends.** Over 2007–2025 (Swiss data only), short-distance migrants show a consistent negative (advancing) trend for both breeder and migrant peaks; long-distance migrants show a divergent pattern — migration advancing (−0.19 days yr⁻¹) while breeding activity is slightly delayed (+0.15 days yr⁻¹), consistent with Lst species being constrained by fixed departure cues at distant wintering grounds while Kst species track local conditions more tightly. These trend estimates currently come from a single (Swiss) time series and should be treated as suggestive until a comparable multi-decade series exists for Bavaria or Württemberg.
+
+**Q4 — Cross-dataset agreement.** The answers to Q1–Q3 are not uniformly reproducible across independently collected datasets, and the degree of reproducibility itself varies systematically with migratory strategy: long-distance migrants classify consistently and agree well across datasets; short-distance migrants show weak median agreement for every metric, diffused across the whole Kst pool rather than concentrated in a few problem species — plausibly reflecting smaller Kst subpopulations or greater sensitivity to the site-classification rule used.
+
+Taken together, these results show that many reference dates warrant empirical reassessment, most unambiguously with respect to migrant departure timing (Q2). Any revision should account for cross-dataset agreement: for long-distance migrants, where validation is strong, a single revised RD per species looks feasible; for short-distance migrants, weak cross-dataset agreement plus region-dependent Q1 results point toward locally calibrated RDs instead.
+
+---
+
 ## Acknowledgements
 
-[Nicolas Strebel](https://www.vogelwarte.ch) (Swiss Ornithological Institute) provided data access, domain expertise, and conceptual guidance across all three analyses.
+The authors thank the Swiss Ornithological Institute for access to the ornitho.ch atlas monitoring data, the [Landesbund für Vogel- und Naturschutz in Bayern e.V. (LBV)](https://www.lbv.de), which coordinates the MhB on behalf of the Bavarian State Office for the Environment, and NABU-Vogelschutzzentrum, which coordinates the MhB on behalf of the Landesanstalt für Umwelt (LUBW). We are grateful to all volunteer observers whose survey effort forms the backbone of these long-term datasets. [Nicolas Strebel](https://www.vogelwarte.ch) (Swiss Ornithological Institute) provided data access, domain expertise, and conceptual guidance throughout.
+
+## Data and Code Availability
+
+Analysis code and result outputs for all six component analyses are in this repository. Raw monitoring data are held by the respective regional monitoring agencies (LBV for Bavaria, LUBW/NABU-Vogelschutzzentrum for Baden-Württemberg, the Swiss Ornithological Institute for Switzerland) and are available on reasonable request, subject to data-sharing agreements — hence the `*.xlsx` / `databb.csv` raw-data files are excluded from version control (see [`.gitignore`](.gitignore)).
